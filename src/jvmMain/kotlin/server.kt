@@ -7,6 +7,10 @@ import io.ktor.routing.get
 import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
+import kotlinx.css.CSSBuilder
+import kotlinx.css.margin
+import kotlinx.css.padding
+import kotlinx.css.px
 import kotlinx.html.HTML
 import kotlinx.html.body
 import kotlinx.html.div
@@ -15,7 +19,10 @@ import kotlinx.html.id
 import kotlinx.html.script
 import kotlinx.html.title
 
+//import kotlinx.css.
+
 fun HTML.index() {
+    CSSBuilder()
     head {
         title("Hello from Ktor!")
     }
@@ -31,17 +38,19 @@ fun HTML.index() {
 }
 
 
-fun HTML.p2() {
+fun HTML.envelope() {
+
+
+
+
+
+
+
     head {
-        title("P2")
+        title("Title Goes Here 1")
     }
     body {
-        div {
-            +"P2"
-        }
-        div {
-            id = "root"
-        }
+        div { id = "root" }
         script(src = "/static/output.js") {}
     }
 }
@@ -53,8 +62,8 @@ fun main() {
             get("/") {
                 call.respondHtml(HttpStatusCode.OK, HTML::index)
             }
-            get("/p2") {
-                call.respondHtml(HttpStatusCode.OK, HTML::p2)
+            get("/envelope") {
+                call.respondHtml(HttpStatusCode.OK, HTML::envelope)
             }
             static("/static") {
                 resources()

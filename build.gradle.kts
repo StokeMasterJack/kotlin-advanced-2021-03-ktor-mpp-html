@@ -8,6 +8,7 @@ plugins {
 group = "ss"
 version = "1.0-SNAPSHOT"
 
+
 repositories {
     jcenter()
     mavenCentral()
@@ -16,17 +17,26 @@ repositories {
     maven { url = uri("https://dl.bintray.com/kotlin/ktor") }
 }
 
+
 kotlin {
 
+
     jvm {
+
         compilations.all {
             kotlinOptions.jvmTarget = "1.8"
+            kotlinOptions.languageVersion =  "1.4"
+            kotlinOptions.apiVersion = "1.4"
+            kotlinOptions.suppressWarnings = true
         }
+
         testRuns["test"].executionTask.configure {
             useJUnit()
         }
         withJava()
     }
+
+
 
     js(LEGACY) {
         browser {
@@ -47,38 +57,54 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting
+
+        val commonMain by getting{
+            dependencies {
+                implementation("org.jetbrains:kotlin-css:1.0.0-pre.110-kotlin-1.4.10")
+            }
+        }
+
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
             }
         }
+
+
         val jvmMain by getting {
             dependencies {
+                implementation("org.jetbrains:kotlin-css:1.0.0-pre.110-kotlin-1.4.10")
                 implementation("io.ktor:ktor-server-netty:1.4.0")
                 implementation("io.ktor:ktor-html-builder:1.4.0")
                 implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2")
+
             }
         }
+
         val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
             }
         }
+
         val jsMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-html-js:0.7.2")
+                implementation("org.jetbrains:kotlin-css:1.0.0-pre.110-kotlin-1.4.10")
                 implementation("org.jetbrains:kotlin-react:16.13.1-pre.113-kotlin-1.4.0")
                 implementation("org.jetbrains:kotlin-react-dom:16.13.1-pre.113-kotlin-1.4.0")
             }
         }
+
         val jsTest by getting {
             dependencies {
                 implementation(kotlin("test-js"))
             }
         }
     }
+
+
+
 }
 
 application {
@@ -94,6 +120,7 @@ tasks.getByName<Jar>("jvmJar") {
     val jsBrowserProductionWebpack = tasks.getByName<KotlinWebpack>("jsBrowserProductionWebpack")
     from(File(jsBrowserProductionWebpack.destinationDirectory, jsBrowserProductionWebpack.outputFileName))
 }
+
 
 tasks.getByName<JavaExec>("run") {
     dependsOn(tasks.getByName<Jar>("jvmJar"))
