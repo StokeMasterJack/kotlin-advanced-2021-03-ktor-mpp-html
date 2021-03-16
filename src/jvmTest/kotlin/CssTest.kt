@@ -15,4 +15,16 @@ class CssTest {
         assertEquals("margin: 10px;\npadding: 10px;\n", b.toString())
 
     }
+
+    @Test
+    fun test2() {
+        val inlineStyle = buildCss{
+            margin(10.px)
+            padding(10.px)
+        }
+
+
+        val expected = "margin: 10px; padding: 10px;"
+
+    }
 }

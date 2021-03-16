@@ -61,6 +61,7 @@ kotlin {
         val commonMain by getting{
             dependencies {
                 implementation("org.jetbrains:kotlin-css:1.0.0-pre.110-kotlin-1.4.10")
+                implementation("org.jetbrains.kotlinx:kotlinx-html:0.7.2")
             }
         }
 

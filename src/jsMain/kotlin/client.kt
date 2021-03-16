@@ -1,11 +1,11 @@
 import kotlinx.browser.document
 import kotlinx.browser.window
-import kotlinx.css.CSSBuilder
+import kotlinx.css.Color
+import kotlinx.css.backgroundColor
 import kotlinx.css.margin
 import kotlinx.css.padding
 import kotlinx.css.px
 import kotlinx.html.DIV
-import kotlinx.html.InputType
 import kotlinx.html.div
 import kotlinx.html.dom.append
 import kotlinx.html.h1
@@ -59,27 +59,14 @@ fun DIV.usersPage() {
         User(3, "jblow", "Joe", "Blow")
     )
 
-//    div{
-//        css{
-//            margin(10.px)
-//            padding(10.px)
-//        }
-//    }
-//
-//    h1{
-//        css{
-//           color = Color()
-//        }
-//    }
 
     div {
 
-        val b = CSSBuilder()
-        b.margin(10.px)
-        b.padding(10.px)
-        style = b.toString().filter { it != '\n' }
-
-
+        css {
+            margin(30.px)
+            padding(30.px)
+            backgroundColor = Color("#EEEEEE")
+        }
 
         usersTable(users)
     }
@@ -87,13 +74,18 @@ fun DIV.usersPage() {
 
 }
 
-fun f1(): Unit {
-    val cssBuilder = CSSBuilder()
-}
 
 fun DIV.usersTable(users: List<User>) {
     div {
-        h1 { +"Users" }
+        h1 {
+            style = "color:blue"
+
+//            css {
+//                color = Color("yellow")
+//            }
+
+            +"Users 1"
+        }
 
         table {
             users.forEach {
